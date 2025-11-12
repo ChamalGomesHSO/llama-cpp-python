@@ -20,9 +20,9 @@ jobs:
         id: set-matrix
         run: |
           $matrix = @{
-              'os' = @('ubuntu-22.04') #, 'windows-2022')
-              'pyver' = @("3.9", "3.10", "3.11", "3.12")
-              'cuda' = @("12.1.1", "12.2.2", "12.3.2", "12.4.1") #, "12.5.1", "12.6.1")
+              'os' = @('ubuntu-22.04')
+              'pyver' = @("3.11", "3.12")
+              'cuda' = @("12.4.1")
               'releasetag' = @("basic")
           }
 
@@ -112,7 +112,7 @@ jobs:
             $env:LD_LIBRARY_PATH = $env:CONDA_PREFIX + '/lib:' + $env:LD_LIBRARY_PATH
           }
           $env:VERBOSE = '1'
-          $env:CMAKE_ARGS = '-DGGML_CUDA=on -DCMAKE_CUDA_ARCHITECTURES=all'
+          $env:CMAKE_ARGS = '-DGGML_CUDA=on -DCMAKE_CUDA_ARCHITECTURES=75'
           $env:CMAKE_ARGS = "-DGGML_CUDA_FORCE_MMQ=ON $env:CMAKE_ARGS"
           # if ($env:AVXVER -eq 'AVX') {
           $env:CMAKE_ARGS = $env:CMAKE_ARGS + ' -DGGML_AVX2=off -DGGML_FMA=off -DGGML_F16C=off'
